@@ -1,6 +1,5 @@
 <script lang="ts">
 import TitleBar from "./components/titlebar/TitleBar.svelte";
-
 </script>
 
 <TitleBar/>
