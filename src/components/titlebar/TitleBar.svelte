@@ -1,6 +1,7 @@
 <script lang="ts">
     import {appWindow, availableMonitors} from "@tauri-apps/api/window"
 import { onMount } from "svelte";
+import Menu from "./Menu.svelte";
 
     let isAppMaximized
 
@@ -28,6 +29,9 @@ import { onMount } from "svelte";
     onMount(async() => {
         isAppMaximized = screen.availHeight == window.outerHeight 
     }) 
+
+    let isMenuShown = false
+    const showMenu = () => isMenuShown = !isMenuShown
 </script>
 
 <div class="title-bar" data-tauri-drag-region>
@@ -49,7 +53,11 @@ import { onMount } from "svelte";
         </button>
     </div>
     <div class="end">
-        <img src="images/window-controls/menu.svg" alt="Open menu" class="title-button menu-button">
+        <img src="images/window-controls/menu.svg" alt="Open menu" class="title-button menu-button {isMenuShown ? "active" : ""}" on:click="{showMenu}">
+
+        {#if isMenuShown}
+            <div class="menu-container"><Menu/></div>
+        {/if}
     </div>
     <div class="window-controls">
         <img src="images/window-controls/minimize.svg" alt="Minimize" on:click="{minimizeWindow}">
@@ -88,6 +96,10 @@ import { onMount } from "svelte";
         margin: 0;
     }
 
+    .menu-container {
+        position: absolute;
+    }
+
     .title-button {
         @include button;
         @include title-bar-image; 
@@ -103,6 +115,10 @@ import { onMount } from "svelte";
         &.menu-button {
             padding: 5px;
             margin-right: 0;
+
+            &.active {
+                background-color: hsl(0, 0%, 88%);
+            }
         }
     }
 
