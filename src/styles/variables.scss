@@ -1,4 +1,15 @@
-$text-color: hsl(0, 0%, 0%);
-$hover-color: hsl(0, 0%, 88%);
-$focus-color: hsl(0, 0%, 93%);
-$bg-color: hsl(0, 0%, 100%);
+:root {
+    --text-color: hsl(0, 0%, 0%);
+    --focus-color: hsl(0, 0%, 88%);
+    --hover-color: hsl(0, 0%, 93%);
+    --bg-color: hsl(0, 0%, 100%);
+}
+
+.dark-mode {
+    p, button, h1, h2, h3, h4, h5, h6, li, ul {
+        color: white;
+    }
+    --bg-color: hsl(0, 0%, 14%);
+    --focus-color: hsl(0, 2%, 20%);
+    --hover-color: hsl(0, 0%, 30%);
+}

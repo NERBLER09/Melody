@@ -1,6 +1,7 @@
 <script lang="ts">
-    import {appWindow, availableMonitors} from "@tauri-apps/api/window"
+    import {appWindow} from "@tauri-apps/api/window"
 import { onMount } from "svelte";
+import { showDarkMode } from "../../data/controller";
 import Menu from "./Menu.svelte";
 
     let isAppMaximized
@@ -11,16 +12,12 @@ import Menu from "./Menu.svelte";
     const maximizeRestoreWindow = async() => {
         if(await appWindow.isMaximized()) {
             appWindow.unmaximize()
-        isAppMaximized = !await appWindow.isMaximized()
+            isAppMaximized = !await appWindow.isMaximized()
         }
         else {
             appWindow.maximize()
             isAppMaximized = !await appWindow.isMaximized()
         }
-        console.log(isAppMaximized)
-
-        // isAppMaximized = await appWindow.isMaximized()
-
     }
     const minimizeWindow = () => {
         appWindow.minimize()
@@ -34,7 +31,7 @@ import Menu from "./Menu.svelte";
     const showMenu = () => isMenuShown = !isMenuShown
 </script>
 
-<div class="title-bar" data-tauri-drag-region>
+<div class="title-bar {$showDarkMode ? "dark-mode" : ""}" data-tauri-drag-region>
     <div class="start">
         <img src="images/window-controls/search.svg" alt="Search" class="title-button search">
     </div>
@@ -84,16 +81,16 @@ import Menu from "./Menu.svelte";
         border: none;
         height: 32px;
         margin: 8px;
-        background-color: $bg-color;
+        background-color: var(--bg-color);
         cursor: pointer;
 
         border-radius: 5px;
 
         &:active {
-            background-color: $focus-color;
+            background-color: var(--focus-color);
         }
         &:hover:not(:active) {
-            background-color: $hover-color;
+            background-color: var(--hover-color);
         }
    }
 
@@ -102,7 +99,7 @@ import Menu from "./Menu.svelte";
     }
 
     .menu-container {
-        position: absolute;
+        position: relative;
     }
 
     .title-button {
@@ -122,7 +119,7 @@ import Menu from "./Menu.svelte";
             margin-right: 0;
 
             &.active {
-                background-color: $focus-color;
+                background-color: var(--focus-color);
             }
         }
     }
@@ -132,6 +129,7 @@ import Menu from "./Menu.svelte";
         align-items: center;
         height: 32px;
         padding: 5px;
+        background-color: var(--bg-color); 
     } 
 
    .nav-button {
@@ -153,7 +151,7 @@ import Menu from "./Menu.svelte";
         cursor: pointer;
 
         .nav-button.active{
-            background: $focus-color;
+            background: var(--focus-color);
         }
     }
 
@@ -167,7 +165,7 @@ import Menu from "./Menu.svelte";
             margin: 0;
 
             &:active {
-                background-color: $focus-color;
+                background-color: var(--focus-color);
             }
         } 
     }

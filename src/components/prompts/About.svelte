@@ -1,6 +1,7 @@
 <script lang="ts">
     import {app} from "@tauri-apps/api"
 import { onMount } from "svelte"
+import { showDarkMode } from "../../data/controller";
 import { showAboutPrompt } from "../../data/prompts";
 
     let version: string
@@ -12,7 +13,7 @@ import { showAboutPrompt } from "../../data/prompts";
     const closeAbout = () => showAboutPrompt.set(false)
 </script>
 
-<div class="about">
+<div class="about {$showDarkMode ? "dark-mode" : ""}">
     <img src="" alt="">
     <p class="name">Melody</p>
     <p class="version">{version}</p>
@@ -30,7 +31,7 @@ import { showAboutPrompt } from "../../data/prompts";
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: $bg-color;
+        background-color: var(--bg-color);
         border: 1px solid black;
         border-radius: 20px;
 

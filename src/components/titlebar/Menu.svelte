@@ -1,16 +1,25 @@
 <script lang="ts">
+import { showDarkMode } from "../../data/controller";
+
 import { showAboutPrompt } from "../../data/prompts";
 
   const handleAboutPrompt = () => {
     showAboutPrompt.set(true)
   }
+
+  const setThemeDark = () => showDarkMode.set(false)
+  const setThemeLight = () => showDarkMode.set(true)
+  const setThemeSystem = () => {
+    const isUsingDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+    showDarkMode.set(isUsingDark)
+  }
 </script>
 
-<div class="menu">
+<div class="menu {$showDarkMode ? "dark-mode" : ""}">
   <div class="theme-selector">
-      <img src="images/menu-items/theme-system.svg" alt="">
-      <img src="images/menu-items/theme-white.svg" alt="">
-      <img src="images/menu-items/theme-dark.svg" alt="">
+      <img src="images/menu-items/theme-system.svg" alt="system theme" on:click="{setThemeSystem}">
+      <img src="images/menu-items/theme-white.svg" alt="light theme" on:click="{setThemeLight}">
+      <img src="images/menu-items/theme-dark.svg" alt="dark theme" on:click="{setThemeDark}">
   </div>
   <hr>
   <ui>
@@ -25,13 +34,13 @@ import { showAboutPrompt } from "../../data/prompts";
   @import "../../styles/variables.scss";
 
   .menu {
-    position: relative;
+    position: absolute;
 
-    right: 25%;
+    left: -90px;
 
     border-radius: 20px;
 
-    background-color: $bg-color;
+    background-color: var(--bg-color);
 
     box-shadow: 0px 1px 1px 1px black;
 
@@ -53,10 +62,10 @@ import { showAboutPrompt } from "../../data/prompts";
       margin-bottom: 5px;
 
       &:active {
-        background-color: $focus-color;
+        background-color: var(--focus-color);
       }
       &:hover:not(:active) {
-        background-color: $hover-color;
+        background-color: var(--hover-color);
       }
     }
 

@@ -1,4 +1,9 @@
-<div class="empty">
+<script>
+
+import { showDarkMode } from "../data/controller";
+
+</script>
+<div class="empty {$showDarkMode ? "dark-mode" : ""}">
     <h1>Welcome to Melody</h1>
     <p>
         Here is where the music in your <code>Music</code> folder will be shown.
@@ -8,6 +13,8 @@
 </div>
 
 <style lang="scss">
+    @import "../styles/variables.scss";
+
     .empty {
         text-align: center;
         padding-left: 40px;
