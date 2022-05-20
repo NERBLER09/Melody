@@ -1,3 +1,11 @@
+<script lang="ts">
+import { showAboutPrompt } from "../../data/prompts";
+
+  const handleAboutPrompt = () => {
+    showAboutPrompt.set(true)
+  }
+</script>
+
 <div class="menu">
   <div class="theme-selector">
       <img src="images/menu-items/theme-system.svg" alt="">
@@ -9,7 +17,7 @@
     <li class="menu-item">Preferences</li>
     <li class="menu-item">Manage Spotify Account</li>
     <hr>
-    <li class="menu-item">About Melody</li>
+    <li class="menu-item" on:click="{handleAboutPrompt}">About Melody</li>
   </ui>
 </div>
 

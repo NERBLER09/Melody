@@ -42,6 +42,7 @@ export default {
 	plugins: [
 		svelte({
 			preprocess: [
+				autoPreprocess(),
 				scss({})
 			],
 			compilerOptions: {
