@@ -37,7 +37,7 @@ import Menu from "./Menu.svelte";
 
 <div class="title-bar {$showDarkMode ? "dark-mode" : ""}" data-tauri-drag-region>
     <div class="start">
-        <img src="images/window-controls/search.svg" alt="Search" class="title-button search">
+        <img src="images/window-controls/search-{$showDarkMode ? "dark" : "light"}.svg" alt="Search" class="title-button search">
     </div>
     <div class="title">
         <button class="nav-button {$shownUi === "home" ? "active" : ""}" on:click="{() => switchUi("home")}">
@@ -54,16 +54,16 @@ import Menu from "./Menu.svelte";
         </button>
     </div>
     <div class="end">
-        <img src="images/window-controls/menu.svg" alt="Open menu" class="title-button menu-button {isMenuShown ? "active" : ""}" on:click="{showMenu}">
+        <img src="images/window-controls/menu-{$showDarkMode ? "dark" : "light"}.svg" alt="Open menu" class="title-button menu-button {isMenuShown ? "active" : ""}" on:click="{showMenu}">
 
         {#if isMenuShown}
             <div class="menu-container"><Menu/></div>
         {/if}
     </div>
     <div class="window-controls">
-        <img src="images/window-controls/minimize.svg" alt="Minimize" on:click="{minimizeWindow}">
-        <img src="images/window-controls/{!isAppMaximized ? "maximize" : "restore"}.svg" alt="Maximize" on:click="{maximizeRestoreWindow}">
-        <img src="images/window-controls/close.svg" alt="Close" on:click="{closeWindow}">
+        <img src="images/window-controls/minimize-{$showDarkMode ? "dark" : "light"}.svg" alt="Minimize" on:click="{minimizeWindow}">
+        <img src="images/window-controls/{!isAppMaximized ? "maximize" : "restore"}-{$showDarkMode ? "dark" : "light"}.svg" alt="Maximize" on:click="{maximizeRestoreWindow}">
+        <img src="images/window-controls/close-{$showDarkMode ? "dark" : "light"}.svg" alt="Close" on:click="{closeWindow}">
     </div>
 </div>
 
