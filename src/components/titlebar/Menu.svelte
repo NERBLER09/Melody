@@ -14,6 +14,8 @@
 </div>
 
 <style lang="scss">
+  @import "../../styles/variables.scss";
+
   .menu {
     position: relative;
 
@@ -21,7 +23,7 @@
 
     border-radius: 20px;
 
-    background-color: white;
+    background-color: $bg-color;
 
     box-shadow: 0px 1px 1px 1px black;
 
@@ -43,10 +45,10 @@
       margin-bottom: 5px;
 
       &:active {
-        background-color: hsl(0, 0%, 93%);
+        background-color: $focus-color;
       }
-      &:hover {
-        background-color: hsl(0, 0%, 83%);
+      &:hover:not(:active) {
+        background-color: $hover-color;
       }
     }
 

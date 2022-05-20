@@ -67,6 +67,8 @@ import Menu from "./Menu.svelte";
 </div>
 
 <style lang="scss">
+    @import "../../styles/variables.scss";
+
     @mixin title-bar-image {
         margin-left: 20px;
         img {
@@ -82,13 +84,16 @@ import Menu from "./Menu.svelte";
         border: none;
         height: 32px;
         margin: 8px;
-        background-color: white;
+        background-color: $bg-color;
         cursor: pointer;
 
         border-radius: 5px;
 
         &:active {
-            background-color: lightgrey;
+            background-color: $focus-color;
+        }
+        &:hover:not(:active) {
+            background-color: $hover-color;
         }
    }
 
@@ -117,7 +122,7 @@ import Menu from "./Menu.svelte";
             margin-right: 0;
 
             &.active {
-                background-color: hsl(0, 0%, 88%);
+                background-color: $focus-color;
             }
         }
     }
@@ -148,7 +153,7 @@ import Menu from "./Menu.svelte";
         cursor: pointer;
 
         .nav-button.active{
-            background: hsl(0, 0%, 83%);
+            background: $focus-color;
         }
     }
 
@@ -162,7 +167,7 @@ import Menu from "./Menu.svelte";
             margin: 0;
 
             &:active {
-                background-color: lightgrey;
+                background-color: $focus-color;
             }
         } 
     }
