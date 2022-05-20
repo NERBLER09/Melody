@@ -1,7 +1,7 @@
 <script lang="ts">
     import {appWindow} from "@tauri-apps/api/window"
 import { onMount } from "svelte";
-import { showDarkMode } from "../../data/controller";
+import { showDarkMode, shownUi, uiView } from "../../data/controller";
 import Menu from "./Menu.svelte";
 
     let isAppMaximized
@@ -29,6 +29,10 @@ import Menu from "./Menu.svelte";
 
     let isMenuShown = false
     const showMenu = () => isMenuShown = !isMenuShown
+
+    const switchUi = (ui: uiView) => {
+        shownUi.set(ui)
+    }
 </script>
 
 <div class="title-bar {$showDarkMode ? "dark-mode" : ""}" data-tauri-drag-region>
@@ -36,16 +40,16 @@ import Menu from "./Menu.svelte";
         <img src="images/window-controls/search.svg" alt="Search" class="title-button search">
     </div>
     <div class="title">
-        <button class="nav-button active">
+        <button class="nav-button {$shownUi === "home" ? "active" : ""}" on:click="{() => switchUi("home")}">
             <p>Home</p>
         </button>
-        <button class="nav-button">
+        <button class="nav-button {$shownUi === "songs" ? "active" : ""}" on:click="{() => switchUi("songs")}">
             <p>Songs</p>
         </button>
-        <button class="nav-button">
+        <button class="nav-button {$shownUi === "albums" ? "active" : ""}" on:click="{() => switchUi("albums")}">
             <p>Albums</p>
         </button>
-        <button class="nav-button">
+        <button class="nav-button {$shownUi === "playlists" ? "active" : ""}" on:click="{() => switchUi("playlists")}">
             <p>Playlists</p>
         </button>
     </div>
