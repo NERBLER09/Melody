@@ -1,27 +1,51 @@
 <script lang="ts">
+import { FileEntry, readDir } from "@tauri-apps/api/fs";
+import { audioDir } from "@tauri-apps/api/path";
+import { onMount } from "svelte";
+
 import About from "./components/prompts/About.svelte";
 import TitleBar from "./components/titlebar/TitleBar.svelte";
 import { showDarkMode, shownUi } from "./data/controller";
+import { music } from "./data/data";
 import { showAboutPrompt } from "./data/prompts";
 import Albums from "./pages/Albums.svelte";
 import Empty from "./pages/Empty.svelte";
 import Home from "./pages/Home.svelte";
 import Playlists from "./pages/Playlists.svelte";
 import Songs from "./pages/Songs.svelte";
+
+onMount(async() => {
+	const musicDir = await audioDir()
+	const musicTemp = await readDir(musicDir, {recursive: true})
+	
+	const isMusicFile = (file: FileEntry): boolean => {
+		const re = /(?:\.([^.]+))?$/ // Gets the file extension 
+		const fileExt = re.exec(file.name)[0]
+		if(fileExt === ".mp3" || fileExt === ".wav" || fileExt === ".flac"){
+			return true
+		}
+
+		return false	
+	}
+
+	music.set(musicTemp.filter(isMusicFile))
+}) 
 </script>
 
 <main class="{$showAboutPrompt ? "about-shown" : ""} {$showDarkMode ? "dark-mode" : ""}">
 	<TitleBar/>
-	<Empty/>
-
-	{#if $shownUi === "home"}
-		<Home/>	
-	{:else if $shownUi === "songs"}
-		<Songs/>
-	{:else if $shownUi === "albums"}
-		<Albums/>
-	{:else if $shownUi === "playlists"}
-		<Playlists/>
+	{#if $music.length === 0}
+		<Empty/>
+	{:else}
+		{#if $shownUi === "home"}
+			<Home/>	
+		{:else if $shownUi === "songs"}
+			<Songs/>
+		{:else if $shownUi === "albums"}
+			<Albums/>
+		{:else if $shownUi === "playlists"}
+			<Playlists/>
+		{/if}
 	{/if}
 </main>
 

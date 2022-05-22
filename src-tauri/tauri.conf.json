@@ -12,7 +12,24 @@
   },
   "tauri": {
     "allowlist": {
-      "all": true
+      "all": true,
+      "fs": {
+        "all": false,
+        "copyFile": false,
+        "createDir": false,
+        "readDir": true,
+        "readFile": false,
+        "removeDir": false,
+        "removeFile": false,
+        "renameFile": false,
+        "scope": [
+          "$AUDIO"
+        ],
+        "writeFile": false
+      },
+      "path": {
+        "all": true
+      }
     },
     "bundle": {
       "active": true,
