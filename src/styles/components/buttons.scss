@@ -1,0 +1,43 @@
+@import "../variables.scss";
+
+@mixin button {
+    border: none;
+    margin: 8px;
+    background-color: var(--button-bg);
+    cursor: pointer;
+
+    border-radius: 5px;
+
+    padding: 10px;
+
+    &:active {
+        // background-color: var(--focus-color);
+        background-color: var(--hover-color);
+    }
+    &:hover:not(:active) {
+        // background-color: var(--hover-color);
+        background-color: var(--focus-color);
+    }
+    &.suggested {
+        background: hsl(213, 76%, 55%);
+        color: white;
+
+        &:hover:not(:active) {
+            background: hsl(213, 76%, 60%);
+        }
+        &:active {
+            background: hsl(213, 76%, 48%);
+        }
+    }
+    &.destructive {
+        background: hsl(356, 75%, 43%);
+        color: white;
+
+        &:hover:not(:active) {
+            background: hsl(356, 75%, 48%);
+        }
+        &:active {
+            background: hsl(356, 75%, 39%);
+        }
+    }
+}

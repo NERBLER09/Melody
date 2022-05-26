@@ -25,6 +25,7 @@ import { showAboutPrompt } from "../../data/prompts";
 
 <style lang="scss">
     @import "../../styles/variables";
+    @import "../../styles/components/index";
 
     .about {
         position: absolute;

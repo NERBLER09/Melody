@@ -1,15 +1,18 @@
 :root {
     --text-color: hsl(0, 0%, 0%);
-    --focus-color: hsl(0, 0%, 88%);
-    --hover-color: hsl(0, 0%, 93%);
+    --focus-color: hsl(0, 0%, 92%);
+    --hover-color: hsl(0, 0%, 84%);
     --bg-color: hsl(0, 0%, 100%);
+    --button-bg: hsl(0, 0%, 94%);
 }
 
 .dark-mode {
     * {
         color: white;
     }
+    --text-color: white;
     --bg-color: hsl(0, 0%, 14%);
-    --focus-color: hsl(0, 2%, 20%);
+    --focus-color: hsl(0, 2%, 22%);
     --hover-color: hsl(0, 0%, 30%);
+    --button-bg: hsl(0, 0%, 20%)
 }
