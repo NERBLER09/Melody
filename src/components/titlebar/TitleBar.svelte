@@ -36,7 +36,7 @@ import Menu from "./Menu.svelte";
 </script>
 
 <div class="title-bar {$showDarkMode ? "dark-mode" : ""}" data-tauri-drag-region>
-    <div class="start">
+    <div class="start" on:click="{() => switchUi("search")}"> 
         <img src="images/window-controls/search-{$showDarkMode ? "dark" : "light"}.svg" alt="Search" class="title-button search">
     </div>
     <div class="title">

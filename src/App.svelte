@@ -12,6 +12,7 @@ import Albums from "./pages/Albums.svelte";
 import Empty from "./pages/Empty.svelte";
 import Home from "./pages/Home.svelte";
 import Playlists from "./pages/Playlists.svelte";
+import Search from "./pages/Search.svelte";
 import Songs from "./pages/Songs.svelte";
 
 onMount(async() => {
@@ -45,6 +46,8 @@ onMount(async() => {
 			<Albums/>
 		{:else if $shownUi === "playlists"}
 			<Playlists/>
+		{:else if $shownUi === "search"}
+			<Search/>
 		{/if}
 	{/if}
 </main>
