@@ -2,6 +2,7 @@
 import { FileEntry, readDir } from "@tauri-apps/api/fs";
 import { audioDir } from "@tauri-apps/api/path";
 import { onMount } from "svelte";
+import * as _ from "lodash"
 
 import About from "./components/prompts/About.svelte";
 import TitleBar from "./components/titlebar/TitleBar.svelte";
@@ -58,6 +59,7 @@ onMount(async() => {
 	addSubItems(musicTemp)
 	musicTemp = musicTemp.filter(isMusicFile)
 	musicTemp = musicTemp.filter((file) => isFile(file.name))
+	musicTemp = _.uniq(musicTemp)
 
 	music.set(musicTemp)
 
