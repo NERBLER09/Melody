@@ -67,8 +67,8 @@ onMount(async() => {
 }) 
 </script>
 
+<TitleBar/>
 <main class="{$showAboutPrompt ? "about-shown" : ""} {$showDarkMode ? "dark-mode" : ""}">
-	<TitleBar/>
 	{#if $music.length === 0}
 		<Empty/>
 	{:else}
@@ -99,5 +99,6 @@ onMount(async() => {
 	main {
 		background-color: var(--bg-color);	
 		height: 100%;
+		overflow: auto;
 	}
 </style>

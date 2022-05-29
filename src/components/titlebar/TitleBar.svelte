@@ -112,7 +112,7 @@ import Menu from "./Menu.svelte";
 
         width: 20px;
         height: 20px;
-        
+
         &.search {
             width: 30px;
             height: 30px;
@@ -134,6 +134,11 @@ import Menu from "./Menu.svelte";
         height: 32px;
         padding: 5px;
         background-color: var(--bg-color); 
+
+        position: sticky;
+        top: 0;
+
+        width: 100%;
     } 
 
    .nav-button {
