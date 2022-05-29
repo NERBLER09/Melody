@@ -17,7 +17,7 @@ import Songs from "./pages/Songs.svelte";
 
 onMount(async() => {
 	const musicDir = await audioDir()
-	const musicTemp = await readDir(musicDir, {recursive: true})
+	let musicTemp = await readDir(musicDir, {recursive: true})
 	
 	const isMusicFile = (file: FileEntry): boolean => {
 		const re = /(?:\.([^.]+))?$/ // Gets the file extension 
@@ -29,7 +29,39 @@ onMount(async() => {
 		return false	
 	}
 
-	music.set(musicTemp.filter(isMusicFile))
+	const isFile = (fileName: string): boolean => {
+		const re = /(?:\.([^.]+))?$/ // Gets the file extension 
+		const fileExt = re.exec(fileName)[0]
+
+		return fileExt !== ""
+
+	}
+
+	const addSubItems = (object: FileEntry[]) => {
+		for(let item of object) {
+			const isItemHidden = item.name[0] === "."
+			if(item?.children !== [] && !isItemHidden && !isFile(item.name)) {
+				const subItemsTemp: FileEntry[] = []
+
+				for(const subItem of item.children) {
+					subItemsTemp.push(subItem)	
+					if(subItem?.children !== [] && !isItemHidden && !isFile(subItem.name)) {
+						addSubItems(item?.children)
+					}
+				}
+
+				musicTemp.push(...subItemsTemp)
+			}
+		}
+	}
+
+	addSubItems(musicTemp)
+	musicTemp = musicTemp.filter(isMusicFile)
+	musicTemp = musicTemp.filter((file) => isFile(file.name))
+
+	music.set(musicTemp)
+
+	console.table(musicTemp)
 }) 
 </script>
 
