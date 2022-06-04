@@ -24,4 +24,7 @@ import { music } from "../data/data";
 
         justify-content: center;
     }
+    h1 {
+        margin-left: 30px;
+    }
 </style>

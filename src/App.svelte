@@ -23,7 +23,7 @@ onMount(async() => {
 	const isMusicFile = (file: FileEntry): boolean => {
 		const re = /(?:\.([^.]+))?$/ // Gets the file extension 
 		const fileExt = re.exec(file.name)[0]
-		if(fileExt === ".mp3" || fileExt === ".wav" || fileExt === ".flac"){
+		if(fileExt === ".mp3"  || fileExt === ".flac"){
 			return true
 		}
 
@@ -62,8 +62,6 @@ onMount(async() => {
 	musicTemp = _.uniq(musicTemp)
 
 	music.set(musicTemp)
-
-	console.table(musicTemp)
 }) 
 </script>
 
