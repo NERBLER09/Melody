@@ -10,7 +10,9 @@ import {invoke} from "@tauri-apps/api/tauri"
 
     onMount(async() => {
         // Create backend call to fetch music metadata
-        invoke("read_song_metadata", {filePath: path}).then((title: string) => songName= title)
+        invoke("read_song_metadata", {filePath: path}).then((data: string[]) => {
+            songName = data[0]
+        })
     })
 </script>
 
