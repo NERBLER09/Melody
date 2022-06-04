@@ -15,6 +15,7 @@ import Home from "./pages/Home.svelte";
 import Playlists from "./pages/Playlists.svelte";
 import Search from "./pages/Search.svelte";
 import Songs from "./pages/Songs.svelte";
+import { addMetadataToSongsList } from "./api/local";
 
 onMount(async() => {
 	const musicDir = await audioDir()
@@ -61,7 +62,10 @@ onMount(async() => {
 	musicTemp = musicTemp.filter((file) => isFile(file.name))
 	musicTemp = _.uniq(musicTemp)
 
-	music.set(musicTemp)
+	addMetadataToSongsList(musicTemp).then((value) => {
+		console.table(value)
+		music.set(value)
+	})
 }) 
 </script>
 

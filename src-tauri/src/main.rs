@@ -3,7 +3,7 @@
   windows_subsystem = "windows"
 )]
 
-use audiotags::{Tag, TagType};
+use audiotags::{Tag, TagType, Picture};
 
 fn main() {
   tauri::Builder::default()
@@ -13,7 +13,7 @@ fn main() {
 }
 
 #[tauri::command]
-fn read_song_metadata(file_path: &str) -> (String, String) {
+fn read_song_metadata(file_path: &str) -> (String, String, String) {
   let mut tags = Tag::new().read_from_path(file_path).unwrap();
 
   let mut song_name:&str = "";
@@ -22,5 +22,17 @@ fn read_song_metadata(file_path: &str) -> (String, String) {
     None => println!("No title set")
   }
 
-  (song_name.into(), "Placeholder album art location".into())
+  let mut artist_name: &str = "";
+  match tags.artist() {
+    Some(artist) => artist_name = artist,
+    None => println!("No artist set")
+  }
+
+  let mut album_name: &str = "";
+  match tags.album_title() {
+    Some(album) => album_name = album,
+    None => println!("No album set")
+  }
+
+  (song_name.into(), artist_name.into(), album_name.into())
 }
