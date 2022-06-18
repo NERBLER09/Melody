@@ -8,7 +8,9 @@ import { showDarkMode } from "../../data/controller";
 </script>
 
 <div class="song-item {$showDarkMode ? "dark-mode" : ""}">
-    <p>{title}</p>
+    <p class="title">{title}</p>
+    <p class="artist">{artist}</p>
+    <p class="album">{album}</p>
 </div>
 
 <style lang="scss">
@@ -17,10 +19,27 @@ import { showDarkMode } from "../../data/controller";
 
     .song-item {
         @include button;
-        // width: 20ch;
+        height: 25px;
 
-        height: 200px;
-        min-width: 200px;
-        max-width: 200px;
+        display: flex;
+        align-items: center;
+        
+        p.title {
+            margin-left: 20px;
+            margin-right: 10px;
+
+            width: 33.3%;
+        }
+
+        p.artist {
+            width: 33.3%;
+        }
+
+        p.album {
+            margin-right: 20px;
+            margin-left: 10px;
+
+            width: 33.3%;
+        }
     }
 </style>

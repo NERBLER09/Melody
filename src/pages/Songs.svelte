@@ -17,12 +17,16 @@ import { music } from "../data/data";
     @import "../styles/variables.scss";
     .song-list {
         display: flex;
-        flex-wrap: wrap;
+        // flex-wrap: wrap;
+        flex-direction: column;
 
         height: 100%;
-        width: 100%;
+        // width: 100%;
 
         justify-content: center;
+
+        padding-left: 10%;
+        padding-right: 10%;
     }
     h1 {
         margin-left: 30px;
