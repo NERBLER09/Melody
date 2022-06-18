@@ -63,7 +63,6 @@ onMount(async() => {
 	musicTemp = _.uniq(musicTemp)
 
 	addMetadataToSongsList(musicTemp).then((value) => {
-		console.table(value)
 		music.set(value)
 	})
 }) 

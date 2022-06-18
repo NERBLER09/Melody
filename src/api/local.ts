@@ -4,8 +4,6 @@ import { invoke } from "@tauri-apps/api/tauri"
 export const getMusicMetadata = async(filePath: string): Promise<MusicObject> => {
     const metadata = await invoke("read_song_metadata", {filePath})
 
-    console.table(metadata)
-
     const data: MusicObject = {
         title: metadata[0],
         artist: metadata[1],

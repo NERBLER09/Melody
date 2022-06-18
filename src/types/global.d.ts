@@ -5,3 +5,8 @@ interface MusicObject {
     filePath: string,
     fileName?: string
 }
+
+interface AlbumObject {
+    artist: string,
+    album: string
+}

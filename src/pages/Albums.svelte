@@ -1,11 +1,58 @@
-<script>
+<script lang="ts">
+  import { onMount } from "svelte";
+  import * as _ from "lodash";
 
-import { showDarkMode } from "../data/controller";
+  import AlbumItem from "../components/album/AlbumItem.svelte";
+  import { showDarkMode } from "../data/controller";
+  import { music } from "../data/data";
+
+  let albumList: AlbumObject[] = $music;
+
+  onMount(() => {
+    const filterItem = () => {
+      const itemTemp = []
+      for(const item of albumList) {
+        const data = {
+          album: item.album,
+          artist: item.artist
+        }
+
+        let index = albumList.indexOf(item)
+        index = index > 2 ? index - 1 : index
+        if(albumList[index].album !== item.album) {
+          itemTemp.push(data)
+        }
+      } 
+
+      albumList = itemTemp
+    }
+    filterItem()
+  });
 </script>
-<div class="albums {$showDarkMode ? "dark-mode" : ""}">
-    <h1>Albums</h1>
+
+<div class="albums {$showDarkMode ? 'dark-mode' : ''}">
+  <h1>Albums</h1>
+
+  <div class="song-list">
+    {#each albumList as song}
+      <AlbumItem {...song} />
+    {/each}
+  </div>
 </div>
 
 <style lang="scss">
-    @import "../styles/variables.scss";
+  @import "../styles/variables.scss";
+
+  .song-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    height: 100%;
+    width: 100%;
+
+    justify-content: center;
+  }
+  h1 {
+    margin-left: 30px;
+  }
 </style>
