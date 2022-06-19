@@ -6,10 +6,13 @@ showDarkMode.subscribe(value => {
     localStorage.setItem("isDarkMode", JSON.stringify(value))
 })
 
-export type uiView = "home" | "songs" | "albums" | "playlists" | "search"
+export type uiView = "home" | "songs" | "albums" | "playlists" | "search" | "album-preview"
 const shownUi: Writable<uiView> = writable("home")
+
+const albumToPreview: Writable<AlbumObject> = writable() 
 
 export {
     showDarkMode,
-    shownUi
+    shownUi,
+    albumToPreview
 }

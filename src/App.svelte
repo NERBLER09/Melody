@@ -16,6 +16,7 @@
   import Search from "./pages/Search.svelte";
   import Songs from "./pages/Songs.svelte";
   import { addMetadataToSongsList } from "./api/local";
+import AlbumPreview from "./pages/AlbumPreview.svelte";
 
   onMount(async () => {
     const musicDir = await audioDir();
@@ -89,6 +90,8 @@
     <Playlists />
   {:else if $shownUi === "search"}
     <Search />
+  {:else if $shownUi === "album-preview"}
+    <AlbumPreview/>
   {/if}
 </main>
 
