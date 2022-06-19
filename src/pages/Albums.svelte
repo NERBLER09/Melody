@@ -5,28 +5,12 @@
   import AlbumItem from "../components/album/AlbumItem.svelte";
   import { showDarkMode } from "../data/controller";
   import { music } from "../data/data";
+import { getAlbums } from "../api/local";
 
   let albumList: AlbumObject[] = $music;
 
   onMount(() => {
-    const filterItem = () => {
-      const itemTemp = []
-      for(const item of albumList) {
-        const data = {
-          album: item.album,
-          artist: item.artist
-        }
-
-        let index = albumList.indexOf(item)
-        index = index > 2 ? index - 1 : index
-        if(albumList[index].album !== item.album) {
-          itemTemp.push(data)
-        }
-      } 
-
-      albumList = itemTemp
-    }
-    filterItem()
+    albumList = getAlbums()
   });
 </script>
 
