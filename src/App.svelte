@@ -17,6 +17,7 @@
   import Songs from "./pages/Songs.svelte";
   import { addMetadataToSongsList } from "./api/local";
 import AlbumPreview from "./pages/AlbumPreview.svelte";
+import SubsectonTitlebar from "./components/titlebar/SubsectonTitlebar.svelte";
 
   onMount(async () => {
     const musicDir = await audioDir();
@@ -72,7 +73,11 @@ import AlbumPreview from "./pages/AlbumPreview.svelte";
   });
 </script>
 
-<TitleBar />
+{#if $shownUi === "album-preview"}
+  <SubsectonTitlebar/>
+{:else}
+  <TitleBar />
+{/if}
 <main
   class="{$showAboutPrompt ? 'about-shown' : ''} {$showDarkMode
     ? 'dark-mode'
