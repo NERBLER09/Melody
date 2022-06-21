@@ -1,11 +1,16 @@
 <script>
+import { selectedSong } from "../../api/handlePlayback";
+
   import { showDarkMode } from "../../data/controller";
+
+  $: title = $selectedSong.title 
+  $: artist = $selectedSong.artist
 </script>
 
 <div class="playback-footer {$showDarkMode ? 'dark-mode' : ''}">
   <div class="song-info">
-    <p class="header">[Title]</p>
-    <p class="sub-header">[Artist]</p>
+    <p class="header">{title}</p>
+    <p class="sub-header">{artist}</p>
   </div>
   <div class="media-control">
       <div class="playback-control">
@@ -44,17 +49,16 @@
     justify-content: space-between;
 
     .song-info {
+        width: 15%;
       .header {
         font-weight: bold;
         font-size: 18px;
       }
 
-      p {
-        max-width: 15ch;
-      }
+      
     }
 
-    .placement-control, .que-control, .playback-control {
+    .placement-control, .que-control {
         display: flex;
         align-items: center;
     }
@@ -67,7 +71,7 @@
         .placement-input {
             min-width: 150px;
             width: 100%;
-            max-width: 300px;
+            max-width: 500px;
         }
     }
     .media-control {
@@ -77,6 +81,19 @@
         align-items: center;
         padding-left: 20px;
         padding-right: 20px;
+
+        width: 40%;
+
+        div {
+            width: 100%;
+        }
+    }
+
+    .playback-control {
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
     }
   }
 </style>
