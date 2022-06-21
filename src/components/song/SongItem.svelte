@@ -1,4 +1,6 @@
 <script lang="ts">
+import { selectSongToPlay } from "../../api/handlePlayback";
+
 import { showDarkMode } from "../../data/controller";
 
     export let filePath: string
@@ -7,7 +9,7 @@ import { showDarkMode } from "../../data/controller";
     export let album: string
 </script>
 
-<div class="song-item {$showDarkMode ? "dark-mode" : ""}">
+<div class="song-item {$showDarkMode ? "dark-mode" : ""}" on:click="{() => selectSongToPlay({filePath, title, artist, album})}">
     <p class="title">{title}</p>
     <p class="artist">{artist}</p>
     <p class="album">{album}</p>
