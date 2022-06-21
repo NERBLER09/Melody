@@ -13,5 +13,6 @@ selectedSong.subscribe(value => {
 })
 
 export {
-    selectSongToPlay
+    selectSongToPlay,
+    showSongPlayback
 }

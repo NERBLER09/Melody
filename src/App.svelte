@@ -18,6 +18,8 @@
   import { addMetadataToSongsList } from "./api/local";
 import AlbumPreview from "./pages/AlbumPreview.svelte";
 import SubsectonTitlebar from "./components/titlebar/SubsectonTitlebar.svelte";
+import { showSongPlayback } from "./api/handlePlayback";
+import PlaybackFooter from "./components/song-playback/PlaybackFooter.svelte";
 
   onMount(async () => {
     const musicDir = await audioDir();
@@ -102,6 +104,10 @@ import SubsectonTitlebar from "./components/titlebar/SubsectonTitlebar.svelte";
 
 {#if $showAboutPrompt}
   <About />
+{/if}
+
+{#if $showSongPlayback === true}
+  <PlaybackFooter/>
 {/if}
 
 <style lang="scss">
