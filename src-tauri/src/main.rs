@@ -3,11 +3,11 @@
   windows_subsystem = "windows"
 )]
 
-use audiotags::{Tag, TagType, Picture};
+use audiotags::Tag;
 
 fn main() {
   tauri::Builder::default()
-    .invoke_handler(tauri::generate_handler![read_song_metadata])
+    .invoke_handler(tauri::generate_handler![read_song_metadata, play_audio])
     .run(tauri::generate_context!())
     .expect("error while running melody");
 }
@@ -35,4 +35,9 @@ fn read_song_metadata(file_path: &str) -> (String, String, String) {
   }
 
   (song_name.into(), artist_name.into(), album_name.into())
+}
+
+#[tauri::command]
+fn play_audio(file_path: &str) {
+  println!("TODO: Play audio")
 }
