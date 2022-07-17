@@ -4,6 +4,7 @@
 )]
 
 use audiotags::Tag;
+use soloud::*;
 
 fn main() {
   tauri::Builder::default()
@@ -39,5 +40,14 @@ fn read_song_metadata(file_path: &str) -> (String, String, String) {
 
 #[tauri::command]
 fn play_audio(file_path: &str) {
-  println!("TODO: Play audio")
+    let sl = Soloud::default().unwrap();
+    let mut wav = audio::Wav::default();
+    // wav.load_mem(include_bytes!("/home/finnegan/Music/Far Caspian/Ways To Get Out (Deluxe)/35mm [XPXqGXZXiRk].mp3")).unwrap();
+    wav.load(&std::path::Path::new(&file_path));
+    sl.play(&wav);
+    while sl.voice_count() > 0 {
+        std::thread::sleep(std::time::Duration::from_millis(100));
+    }
+
+    // Ok(())
 }

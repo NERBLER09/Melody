@@ -1,22 +1,19 @@
-import { Writable, writable } from "svelte/store"
-import { invoke } from "@tauri-apps/api/tauri"
+import { Writable, writable } from "svelte/store";
+import { invoke } from "@tauri-apps/api/tauri";
 
-const selectedSong: Writable<MusicObject> = writable()
-const showSongPlayback = writable(false)
+const selectedSong: Writable<MusicObject> = writable();
+const showSongPlayback = writable(false);
 
-const selectSongToPlay = async(song: MusicObject) => {
-    showSongPlayback.set(true)
-    selectedSong.set(song)
-    
-    invoke("play_audio", {filePath: song.filePath})
-}
+const selectSongToPlay = async (song: MusicObject) => {
+  showSongPlayback.set(true);
+  selectedSong.set(song);
 
-selectedSong.subscribe(value => {
-    console.log(`To play: ${value?.title}`)
-})
+  // FIXME: Prevent from blocking interaction with app until song in finished playing
+  await invoke("play_audio", { filePath: song.filePath });
+};
 
-export {
-    selectSongToPlay,
-    showSongPlayback,
-    selectedSong
-}
+selectedSong.subscribe((value) => {
+  console.log(`To play: ${value?.title}`);
+});
+
+export { selectSongToPlay, showSongPlayback, selectedSong };
